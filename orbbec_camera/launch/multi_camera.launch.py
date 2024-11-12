@@ -10,36 +10,50 @@ def generate_launch_description():
     # Include launch files
     package_dir = get_package_share_directory('orbbec_camera')
     launch_file_dir = os.path.join(package_dir, 'launch')
-    launch1_include = IncludeLaunchDescription(
+    '''launch1_include = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_file_dir, 'gemini_330_series.launch.py')
+            os.path.join(launch_file_dir, 'astra_stereo_u3.launch.py')
         ),
         launch_arguments={
             'camera_name': 'camera_01',
-            'usb_port': '2-1.1',
+            'usb_port': '1-6.2',
+            'device_num': '2',
+            'sync_mode': 'standalone'
+        }.items()
+    )'''
+
+    launch2_include = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(launch_file_dir, 'astra_stereo_u3.launch.py')
+        ),
+        launch_arguments={
+            'camera_name': 'camera_02',
+            'usb_port': '1-4.2',
             'device_num': '2',
             'sync_mode': 'standalone'
         }.items()
     )
 
-    launch2_include = IncludeLaunchDescription(
+    launch3_include = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_file_dir, 'gemini_330_series.launch.py')
+            os.path.join(launch_file_dir, 'astra_stereo_u3.launch.py')
         ),
         launch_arguments={
-            'camera_name': 'camera_02',
-            'usb_port': '2-1.2.1',
-            'device_num': '2',
+            'camera_name': 'camera_03',
+            'usb_port': '1-3.2',
+            'device_num': '3',
             'sync_mode': 'standalone'
         }.items()
     )
+
 
     # If you need more cameras, just add more launch_include here, and change the usb_port and device_num
 
     # Launch description
     ld = LaunchDescription([
-        GroupAction([launch1_include]),
+        #GroupAction([launch1_include]),
         GroupAction([launch2_include]),
+        GroupAction([launch3_include]),
     ])
 
     return ld
